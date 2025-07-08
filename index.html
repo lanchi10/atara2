@@ -3,11 +3,22 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>עטרה - קופירייטרית עם כוכבים מסתובבים</title>
+    <title>עטרה - GENSPARK מהפכת העתיד</title>
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
+        :root {
+            --primary-glow: #00f5ff;
+            --secondary-glow: #ff00ff;
+            --accent-glow: #ffff00;
+            --energy-wave: #00ff88;
+            --hologram-blue: #4dd0e1;
+            --neon-purple: #e1bee7;
+            --quantum-green: #69f0ae;
+            --cosmic-orange: #ffab40;
+        }
+
         * {
             margin: 0;
             padding: 0;
@@ -15,206 +26,378 @@
         }
 
         body {
-            font-family: 'Heebo', sans-serif;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 25%, #f093fb 50%, #f5576c 75%, #4facfe 100%);
-            background-size: 400% 400%;
-            animation: gradientShift 15s ease infinite;
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(135deg, #0a0a0a 0%, #1a1a2e 25%, #16213e 50%, #0f3460 75%, #1a1a2e 100%);
+            color: #ffffff;
             overflow-x: hidden;
             position: relative;
         }
 
-        @keyframes gradientShift {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
-        }
-
-        .stars-container {
+        /* 3D Holographic Background */
+        .holographic-bg {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            pointer-events: none;
-            z-index: 1;
+            z-index: -1;
+            background: radial-gradient(circle at 20% 30%, rgba(77, 208, 225, 0.1) 0%, transparent 50%),
+                        radial-gradient(circle at 80% 70%, rgba(255, 0, 255, 0.1) 0%, transparent 50%),
+                        radial-gradient(circle at 50% 50%, rgba(255, 255, 0, 0.05) 0%, transparent 50%);
+            animation: holographic-pulse 8s ease-in-out infinite;
+        }
+
+        @keyframes holographic-pulse {
+            0%, 100% { opacity: 0.3; transform: scale(1); }
+            50% { opacity: 0.8; transform: scale(1.05); }
+        }
+
+        /* Multi-dimensional Stars */
+        .star-field {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
         }
 
         .star {
             position: absolute;
+            width: 3px;
+            height: 3px;
+            background: radial-gradient(circle, var(--primary-glow) 0%, transparent 70%);
             border-radius: 50%;
-            animation: float 6s ease-in-out infinite;
-            opacity: 0.8;
+            animation: star-spin 10s linear infinite;
         }
 
-        .star::before {
-            content: '';
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            width: 4px;
-            height: 4px;
-            background: inherit;
-            border-radius: 50%;
-            transform: translate(-50%, -50%);
-            animation: sparkle 2s ease-in-out infinite;
+        .star:nth-child(2n) { 
+            background: radial-gradient(circle, var(--secondary-glow) 0%, transparent 70%);
+            animation-duration: 8s;
         }
 
-        .star::after {
-            content: '';
-            position: absolute;
-            top: 50%;
-            left: 50%;
+        .star:nth-child(3n) { 
+            background: radial-gradient(circle, var(--accent-glow) 0%, transparent 70%);
+            animation-duration: 12s;
+        }
+
+        .star:nth-child(4n) { 
+            background: radial-gradient(circle, var(--energy-wave) 0%, transparent 70%);
+            animation-duration: 15s;
+        }
+
+        @keyframes star-spin {
+            0% { transform: rotate(0deg) translateX(200px) rotate(0deg); }
+            100% { transform: rotate(360deg) translateX(200px) rotate(-360deg); }
+        }
+
+        /* Energy Waves */
+        .energy-wave {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            z-index: -1;
+            background: linear-gradient(45deg, transparent 40%, rgba(0, 255, 136, 0.1) 50%, transparent 60%);
+            animation: wave-flow 6s ease-in-out infinite;
+        }
+
+        @keyframes wave-flow {
+            0%, 100% { transform: translateX(-100%) rotate(0deg); }
+            50% { transform: translateX(100%) rotate(180deg); }
+        }
+
+        /* Particle System */
+        .particle {
+            position: fixed;
             width: 2px;
             height: 2px;
-            background: inherit;
+            background: var(--quantum-green);
             border-radius: 50%;
-            transform: translate(-50%, -50%);
-            animation: sparkle 2s ease-in-out infinite reverse;
+            animation: particle-float 15s linear infinite;
+            z-index: -1;
         }
 
-        @keyframes float {
-            0%, 100% { transform: translateY(0) rotate(0deg); }
-            25% { transform: translateY(-20px) rotate(90deg); }
-            50% { transform: translateY(0) rotate(180deg); }
-            75% { transform: translateY(20px) rotate(270deg); }
+        @keyframes particle-float {
+            0% { transform: translateY(100vh) translateX(0) scale(0); opacity: 0; }
+            10% { opacity: 1; }
+            90% { opacity: 1; }
+            100% { transform: translateY(-100vh) translateX(200px) scale(1); opacity: 0; }
         }
 
-        @keyframes sparkle {
-            0%, 100% { opacity: 0.3; transform: translate(-50%, -50%) scale(0.8); }
-            50% { opacity: 1; transform: translate(-50%, -50%) scale(1.2); }
+        /* Geometric Morphing Shapes */
+        .morphing-shape {
+            position: fixed;
+            width: 100px;
+            height: 100px;
+            background: linear-gradient(45deg, var(--hologram-blue), var(--neon-purple));
+            animation: shape-morph 20s ease-in-out infinite;
+            z-index: -1;
+            opacity: 0.3;
         }
 
-        .star-pink {
-            background: linear-gradient(45deg, #ff6b9d, #ff8cc8);
-            box-shadow: 0 0 20px #ff6b9d, 0 0 40px #ff6b9d;
+        @keyframes shape-morph {
+            0% { 
+                border-radius: 50%;
+                transform: rotate(0deg) scale(1);
+                clip-path: circle(50% at 50% 50%);
+            }
+            25% { 
+                border-radius: 0%;
+                transform: rotate(90deg) scale(1.2);
+                clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
+            }
+            50% { 
+                border-radius: 30%;
+                transform: rotate(180deg) scale(0.8);
+                clip-path: polygon(30% 0%, 70% 0%, 100% 30%, 100% 70%, 70% 100%, 30% 100%, 0% 70%, 0% 30%);
+            }
+            75% { 
+                border-radius: 0%;
+                transform: rotate(270deg) scale(1.1);
+                clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%);
+            }
+            100% { 
+                border-radius: 50%;
+                transform: rotate(360deg) scale(1);
+                clip-path: circle(50% at 50% 50%);
+            }
         }
 
-        .star-blue {
-            background: linear-gradient(45deg, #4facfe, #00f2fe);
-            box-shadow: 0 0 20px #4facfe, 0 0 40px #4facfe;
-        }
-
-        .star-gold {
-            background: linear-gradient(45deg, #ffd700, #ffed4e);
-            box-shadow: 0 0 20px #ffd700, 0 0 40px #ffd700;
-        }
-
-        .star-purple {
-            background: linear-gradient(45deg, #a855f7, #c084fc);
-            box-shadow: 0 0 20px #a855f7, 0 0 40px #a855f7;
-        }
-
-        .star-size-1 { width: 4px; height: 4px; }
-        .star-size-2 { width: 6px; height: 6px; }
-        .star-size-3 { width: 8px; height: 8px; }
-        .star-size-4 { width: 10px; height: 10px; }
-        .star-size-5 { width: 12px; height: 12px; }
-
-        .content {
-            position: relative;
-            z-index: 2;
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(10px);
-            border-radius: 20px;
-            margin: 20px;
-            overflow: hidden;
-            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.15);
-        }
-
+        /* Futuristic Navigation */
         .nav-container {
-            background: rgba(255, 255, 255, 0.98);
-            backdrop-filter: blur(20px);
-            border-radius: 15px;
-            margin: 20px;
-            padding: 15px 25px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
             position: fixed;
             top: 0;
             left: 0;
-            right: 0;
-            z-index: 10;
+            width: 100%;
+            background: rgba(0, 0, 0, 0.9);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(0, 245, 255, 0.3);
+            z-index: 1000;
+            padding: 1rem 0;
         }
 
-        .nav-link {
-            position: relative;
-            padding: 10px 20px;
-            border-radius: 10px;
-            transition: all 0.3s ease;
-            color: #4a5568;
+        .nav-container::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(0, 245, 255, 0.1), transparent);
+            animation: nav-glow 4s ease-in-out infinite;
+        }
+
+        @keyframes nav-glow {
+            0%, 100% { opacity: 0.3; }
+            50% { opacity: 0.8; }
+        }
+
+        .nav-logo {
+            font-family: 'Orbitron', monospace;
+            font-size: 1.8rem;
+            font-weight: 900;
+            color: var(--primary-glow);
+            text-shadow: 0 0 20px var(--primary-glow);
+            animation: logo-pulse 3s ease-in-out infinite;
+        }
+
+        @keyframes logo-pulse {
+            0%, 100% { text-shadow: 0 0 20px var(--primary-glow); }
+            50% { text-shadow: 0 0 30px var(--primary-glow), 0 0 40px var(--primary-glow); }
+        }
+
+        .nav-item {
+            color: #ffffff;
             text-decoration: none;
-            font-weight: 500;
-        }
-
-        .nav-link:hover {
-            background: linear-gradient(135deg, #667eea, #764ba2);
-            color: white;
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
-        }
-
-        .hero-section {
-            background: linear-gradient(135deg, rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0.7));
-            border-radius: 20px;
-            margin: 120px 20px 20px 20px;
-            padding: 60px 40px;
-            text-align: center;
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            padding: 0.5rem 1rem;
+            margin: 0 0.5rem;
+            border: 1px solid transparent;
+            border-radius: 8px;
+            transition: all 0.3s ease;
             position: relative;
             overflow: hidden;
         }
 
+        .nav-item:hover {
+            color: var(--primary-glow);
+            border-color: var(--primary-glow);
+            background: rgba(0, 245, 255, 0.1);
+            box-shadow: 0 0 20px rgba(0, 245, 255, 0.3);
+        }
+
+        .nav-item::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: linear-gradient(90deg, var(--primary-glow), var(--secondary-glow));
+            transition: width 0.3s ease;
+        }
+
+        .nav-item:hover::after {
+            width: 100%;
+        }
+
+        /* Hero Section - Revolutionary */
+        .hero-section {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            padding: 0 2rem;
+            background: radial-gradient(circle at center, rgba(0, 245, 255, 0.05) 0%, transparent 70%);
+        }
+
+        .hero-content {
+            text-align: center;
+            z-index: 10;
+            max-width: 1200px;
+        }
+
         .hero-title {
-            font-size: 3.5rem;
-            font-weight: 800;
-            background: linear-gradient(135deg, #667eea, #764ba2, #f093fb);
-            background-clip: text;
+            font-family: 'Orbitron', monospace;
+            font-size: clamp(2.5rem, 8vw, 6rem);
+            font-weight: 900;
+            background: linear-gradient(45deg, var(--primary-glow), var(--secondary-glow), var(--accent-glow));
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-            margin-bottom: 20px;
-            animation: titlePulse 3s ease-in-out infinite;
+            background-clip: text;
+            margin-bottom: 2rem;
+            animation: title-glow 4s ease-in-out infinite;
+            line-height: 1.1;
         }
 
-        @keyframes titlePulse {
-            0%, 100% { transform: scale(1); }
-            50% { transform: scale(1.05); }
+        @keyframes title-glow {
+            0%, 100% { 
+                filter: drop-shadow(0 0 20px var(--primary-glow));
+                transform: scale(1);
+            }
+            50% { 
+                filter: drop-shadow(0 0 40px var(--primary-glow)) drop-shadow(0 0 60px var(--secondary-glow));
+                transform: scale(1.05);
+            }
         }
 
+        .hero-subtitle {
+            font-size: clamp(1.2rem, 3vw, 2rem);
+            color: #ffffff;
+            margin-bottom: 1rem;
+            animation: subtitle-float 6s ease-in-out infinite;
+        }
+
+        @keyframes subtitle-float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        .hero-description {
+            font-size: clamp(1rem, 2vw, 1.2rem);
+            color: rgba(255, 255, 255, 0.8);
+            margin-bottom: 3rem;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+            line-height: 1.6;
+        }
+
+        .genspark-badge {
+            display: inline-block;
+            background: linear-gradient(45deg, var(--primary-glow), var(--secondary-glow));
+            color: #000;
+            padding: 0.5rem 1.5rem;
+            border-radius: 50px;
+            font-weight: 700;
+            font-size: 0.9rem;
+            margin-bottom: 2rem;
+            animation: badge-pulse 3s ease-in-out infinite;
+            box-shadow: 0 0 30px rgba(0, 245, 255, 0.5);
+        }
+
+        @keyframes badge-pulse {
+            0%, 100% { transform: scale(1); box-shadow: 0 0 30px rgba(0, 245, 255, 0.5); }
+            50% { transform: scale(1.1); box-shadow: 0 0 50px rgba(0, 245, 255, 0.8); }
+        }
+
+        /* 3D Floating Elements */
+        .floating-element {
+            position: absolute;
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(45deg, var(--hologram-blue), var(--neon-purple));
+            border-radius: 50%;
+            animation: float-3d 12s ease-in-out infinite;
+            opacity: 0.6;
+        }
+
+        @keyframes float-3d {
+            0%, 100% { 
+                transform: translateZ(0) rotateX(0deg) rotateY(0deg);
+                opacity: 0.6;
+            }
+            50% { 
+                transform: translateZ(100px) rotateX(180deg) rotateY(180deg);
+                opacity: 1;
+            }
+        }
+
+        /* Sections */
         .section {
-            background: rgba(255, 255, 255, 0.9);
-            border-radius: 20px;
-            margin: 20px;
-            padding: 50px 40px;
-            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+            padding: 6rem 2rem;
             position: relative;
+            background: rgba(0, 0, 0, 0.3);
+            backdrop-filter: blur(10px);
+            margin: 2rem 0;
+            border-radius: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .section::before {
+            content: '';
+            position: absolute;
+            top: -1px;
+            left: -1px;
+            right: -1px;
+            bottom: -1px;
+            background: linear-gradient(45deg, var(--primary-glow), var(--secondary-glow), var(--accent-glow), var(--energy-wave));
+            border-radius: 20px;
+            z-index: -1;
+            opacity: 0.3;
+            animation: section-border 8s linear infinite;
+        }
+
+        @keyframes section-border {
+            0% { background-position: 0% 50%; }
+            100% { background-position: 100% 50%; }
         }
 
         .section-title {
-            font-size: 2.5rem;
+            font-family: 'Orbitron', monospace;
+            font-size: clamp(2rem, 5vw, 3rem);
             font-weight: 700;
-            color: #4a5568;
-            margin-bottom: 30px;
+            color: var(--primary-glow);
             text-align: center;
-            position: relative;
+            margin-bottom: 3rem;
+            animation: section-title-glow 4s ease-in-out infinite;
         }
 
-        .section-title::after {
-            content: '';
-            position: absolute;
-            bottom: -10px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 80px;
-            height: 4px;
-            background: linear-gradient(135deg, #667eea, #764ba2);
-            border-radius: 2px;
+        @keyframes section-title-glow {
+            0%, 100% { text-shadow: 0 0 20px var(--primary-glow); }
+            50% { text-shadow: 0 0 40px var(--primary-glow), 0 0 60px var(--secondary-glow); }
         }
 
+        /* Cards */
         .card {
-            background: rgba(255, 255, 255, 0.95);
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(20px);
             border-radius: 15px;
-            padding: 30px;
-            margin: 20px 0;
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+            padding: 2rem;
+            margin: 1.5rem;
+            border: 1px solid rgba(0, 245, 255, 0.2);
             transition: all 0.3s ease;
             position: relative;
             overflow: hidden;
@@ -224,75 +407,91 @@
             content: '';
             position: absolute;
             top: 0;
-            left: 0;
-            right: 0;
-            height: 3px;
-            background: linear-gradient(90deg, #667eea, #764ba2, #f093fb);
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(0, 245, 255, 0.1), transparent);
+            transition: left 0.5s ease;
+        }
+
+        .card:hover::before {
+            left: 100%;
         }
 
         .card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+            transform: translateY(-10px) scale(1.02);
+            border-color: var(--primary-glow);
+            box-shadow: 0 20px 40px rgba(0, 245, 255, 0.3);
         }
 
-        .btn-primary {
-            background: linear-gradient(135deg, #667eea, #764ba2);
-            color: white;
-            padding: 15px 30px;
-            border-radius: 25px;
-            text-decoration: none;
+        .card h3 {
+            color: var(--primary-glow);
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
             font-weight: 600;
-            display: inline-block;
-            transition: all 0.3s ease;
-            border: none;
-            cursor: pointer;
-            font-size: 1.1rem;
         }
 
-        .btn-primary:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 10px 25px rgba(102, 126, 234, 0.4);
+        .card p {
+            color: rgba(255, 255, 255, 0.8);
+            line-height: 1.6;
         }
 
+        /* Kinetic Typography */
+        .kinetic-text {
+            font-family: 'Orbitron', monospace;
+            font-size: 1.2rem;
+            color: var(--quantum-green);
+            animation: kinetic-bounce 2s ease-in-out infinite;
+        }
+
+        @keyframes kinetic-bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-5px); }
+        }
+
+        .kinetic-text:nth-child(2n) { animation-delay: 0.2s; }
+        .kinetic-text:nth-child(3n) { animation-delay: 0.4s; }
+        .kinetic-text:nth-child(4n) { animation-delay: 0.6s; }
+
+        /* Responsive Grid */
         .grid {
             display: grid;
-            gap: 20px;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
         }
 
-        .grid-cols-1 { grid-template-columns: repeat(1, 1fr); }
-        .grid-cols-2 { grid-template-columns: repeat(2, 1fr); }
-        .grid-cols-3 { grid-template-columns: repeat(3, 1fr); }
-
-        @media (max-width: 768px) {
-            .grid-cols-2, .grid-cols-3 {
-                grid-template-columns: 1fr;
-            }
-            .hero-title {
-                font-size: 2.5rem;
-            }
-            .nav-container {
-                margin: 10px;
-                padding: 10px 15px;
-            }
+        /* Contact Form */
+        .contact-form {
+            background: rgba(0, 0, 0, 0.7);
+            backdrop-filter: blur(20px);
+            padding: 3rem;
+            border-radius: 20px;
+            border: 1px solid rgba(0, 245, 255, 0.3);
+            max-width: 600px;
+            margin: 0 auto;
         }
 
         .form-group {
-            margin-bottom: 20px;
+            margin-bottom: 2rem;
         }
 
         .form-group label {
             display: block;
-            margin-bottom: 5px;
-            font-weight: 600;
-            color: #4a5568;
+            color: var(--primary-glow);
+            margin-bottom: 0.5rem;
+            font-weight: 500;
         }
 
         .form-group input,
         .form-group textarea {
             width: 100%;
-            padding: 12px 15px;
-            border: 2px solid #e2e8f0;
+            padding: 1rem;
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(0, 245, 255, 0.3);
             border-radius: 10px;
+            color: #ffffff;
             font-size: 1rem;
             transition: all 0.3s ease;
         }
@@ -300,531 +499,472 @@
         .form-group input:focus,
         .form-group textarea:focus {
             outline: none;
-            border-color: #667eea;
-            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+            border-color: var(--primary-glow);
+            box-shadow: 0 0 20px rgba(0, 245, 255, 0.3);
         }
 
-        .footer {
-            background: linear-gradient(135deg, #2d3748, #4a5568);
-            color: white;
-            padding: 30px 40px;
-            text-align: center;
-            margin: 20px;
-            border-radius: 20px;
-        }
-
-        .testimonial {
-            background: linear-gradient(135deg, rgba(102, 126, 234, 0.1), rgba(118, 75, 162, 0.1));
-            border-radius: 15px;
-            padding: 25px;
-            margin: 15px 0;
-            border-right: 4px solid #667eea;
-        }
-
-        .portfolio-item {
-            position: relative;
-            overflow: hidden;
-            border-radius: 15px;
+        .submit-btn {
+            background: linear-gradient(45deg, var(--primary-glow), var(--secondary-glow));
+            color: #000;
+            padding: 1rem 2rem;
+            border: none;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            font-weight: 700;
             cursor: pointer;
             transition: all 0.3s ease;
+            display: block;
+            margin: 0 auto;
+            animation: btn-glow 3s ease-in-out infinite;
         }
 
-        .portfolio-item:hover {
+        @keyframes btn-glow {
+            0%, 100% { box-shadow: 0 0 20px rgba(0, 245, 255, 0.5); }
+            50% { box-shadow: 0 0 40px rgba(0, 245, 255, 0.8); }
+        }
+
+        .submit-btn:hover {
             transform: scale(1.05);
+            box-shadow: 0 0 50px rgba(0, 245, 255, 1);
         }
 
-        .portfolio-item img {
-            width: 100%;
-            height: 200px;
-            object-fit: cover;
-            border-radius: 15px;
-        }
-
-        .service-icon {
-            font-size: 2rem;
-            color: #667eea;
-            margin-bottom: 15px;
-        }
-
-        .floating-decoration {
-            position: absolute;
-            pointer-events: none;
-            opacity: 0.3;
-        }
-
-        .floating-decoration-1 {
-            top: 10%;
-            right: 10%;
-            animation: float 8s ease-in-out infinite;
-        }
-
-        .floating-decoration-2 {
-            top: 50%;
-            left: 5%;
-            animation: float 10s ease-in-out infinite reverse;
-        }
-
-        .floating-decoration-3 {
-            bottom: 20%;
-            right: 5%;
-            animation: float 12s ease-in-out infinite;
-        }
-
-        .mobile-menu {
-            display: none;
-        }
-
+        /* Mobile Responsive */
         @media (max-width: 768px) {
-            .desktop-menu {
-                display: none;
+            .nav-container {
+                padding: 0.5rem 1rem;
             }
-            .mobile-menu {
-                display: block;
+            
+            .hero-section {
+                padding: 0 1rem;
+            }
+            
+            .section {
+                padding: 3rem 1rem;
+                margin: 1rem 0;
+            }
+            
+            .card {
+                margin: 1rem 0;
             }
         }
 
-        .hero-subtitle {
-            font-size: 1.5rem;
-            color: #4a5568;
-            margin-bottom: 15px;
-            font-weight: 500;
+        /* Quantum Particles */
+        .quantum-particle {
+            position: fixed;
+            width: 4px;
+            height: 4px;
+            background: var(--quantum-green);
+            border-radius: 50%;
+            animation: quantum-spin 8s linear infinite;
+            z-index: -1;
         }
 
-        .hero-description {
-            font-size: 1.1rem;
-            color: #718096;
-            margin-bottom: 30px;
-            line-height: 1.6;
+        @keyframes quantum-spin {
+            0% { transform: rotate(0deg) translate(150px) rotate(0deg); opacity: 1; }
+            100% { transform: rotate(360deg) translate(150px) rotate(-360deg); opacity: 0.3; }
         }
 
-        .stats-container {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 20px;
-            margin: 40px 0;
+        /* Holographic Text Effect */
+        .holographic-text {
+            background: linear-gradient(45deg, #00f5ff, #ff00ff, #ffff00, #00ff88);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: holographic-shift 5s ease-in-out infinite;
         }
 
-        .stat-item {
+        @keyframes holographic-shift {
+            0%, 100% { filter: hue-rotate(0deg); }
+            50% { filter: hue-rotate(180deg); }
+        }
+
+        /* 3D Perspective Container */
+        .perspective-container {
+            perspective: 1000px;
+            transform-style: preserve-3d;
+        }
+
+        .rotating-cube {
+            width: 100px;
+            height: 100px;
+            position: relative;
+            transform-style: preserve-3d;
+            animation: cube-rotate 10s linear infinite;
+        }
+
+        @keyframes cube-rotate {
+            0% { transform: rotateX(0deg) rotateY(0deg); }
+            100% { transform: rotateX(360deg) rotateY(360deg); }
+        }
+
+        /* Neon Glow Effects */
+        .neon-glow {
+            color: var(--primary-glow);
+            text-shadow: 
+                0 0 5px var(--primary-glow),
+                0 0 10px var(--primary-glow),
+                0 0 15px var(--primary-glow),
+                0 0 20px var(--primary-glow);
+            animation: neon-flicker 1.5s ease-in-out infinite alternate;
+        }
+
+        @keyframes neon-flicker {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.8; }
+        }
+
+        /* Footer */
+        .footer {
+            background: rgba(0, 0, 0, 0.9);
+            padding: 2rem;
             text-align: center;
-            padding: 20px;
-            background: rgba(255, 255, 255, 0.8);
-            border-radius: 15px;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            border-top: 1px solid rgba(0, 245, 255, 0.3);
+            margin-top: 4rem;
         }
 
-        .stat-number {
-            font-size: 2.5rem;
-            font-weight: 800;
-            color: #667eea;
+        .footer-text {
+            color: rgba(255, 255, 255, 0.6);
+            font-size: 0.9rem;
         }
 
-        .stat-label {
-            font-size: 1rem;
-            color: #4a5568;
-            font-weight: 500;
+        .genspark-signature {
+            color: var(--primary-glow);
+            font-weight: 700;
+            text-shadow: 0 0 10px var(--primary-glow);
+            animation: signature-glow 3s ease-in-out infinite;
+        }
+
+        @keyframes signature-glow {
+            0%, 100% { opacity: 0.8; }
+            50% { opacity: 1; }
         }
     </style>
 </head>
 <body>
-    <!-- Stars Background -->
-    <div class="stars-container" id="starsContainer"></div>
+    <!-- Holographic Background -->
+    <div class="holographic-bg"></div>
+    
+    <!-- Multi-dimensional Star Field -->
+    <div class="star-field" id="starField"></div>
+    
+    <!-- Energy Waves -->
+    <div class="energy-wave"></div>
+    
+    <!-- Particle System -->
+    <div id="particleSystem"></div>
+    
+    <!-- Morphing Shapes -->
+    <div class="morphing-shape" style="top: 20%; left: 10%;"></div>
+    <div class="morphing-shape" style="top: 60%; right: 15%; animation-delay: -10s;"></div>
+    <div class="morphing-shape" style="bottom: 30%; left: 20%; animation-delay: -5s;"></div>
+    
+    <!-- Quantum Particles -->
+    <div id="quantumParticles"></div>
 
     <!-- Navigation -->
     <nav class="nav-container">
-        <div class="flex justify-between items-center">
-            <div class="text-2xl font-bold">
-                <span style="background: linear-gradient(135deg, #667eea, #764ba2); background-clip: text; -webkit-background-clip: text; -webkit-text-fill-color: transparent;">עטרה</span>
-            </div>
-            <div class="desktop-menu">
-                <div class="flex gap-5">
-                    <a href="#home" class="nav-link">בית</a>
-                    <a href="#about" class="nav-link">אודות</a>
-                    <a href="#services" class="nav-link">שירותים</a>
-                    <a href="#portfolio" class="nav-link">פורטפוליו</a>
-                    <a href="#testimonials" class="nav-link">המלצות</a>
-                    <a href="#blog" class="nav-link">בלוג</a>
-                    <a href="#contact" class="nav-link">יצירת קשר</a>
-                </div>
-            </div>
-            <div class="mobile-menu">
-                <button id="mobileMenuBtn" class="p-2 rounded-lg hover:bg-gray-100">
-                    <i class="fas fa-bars"></i>
-                </button>
+        <div class="max-w-7xl mx-auto px-4 flex justify-between items-center">
+            <div class="nav-logo">עטרה</div>
+            <div class="flex items-center space-x-6">
+                <a href="#home" class="nav-item">בית</a>
+                <a href="#about" class="nav-item">אודות</a>
+                <a href="#services" class="nav-item">שירותים</a>
+                <a href="#portfolio" class="nav-item">פורטפוליו</a>
+                <a href="#testimonials" class="nav-item">המלצות</a>
+                <a href="#contact" class="nav-item">יצירת קשר</a>
             </div>
         </div>
     </nav>
 
     <!-- Hero Section -->
     <section id="home" class="hero-section">
-        <div class="floating-decoration floating-decoration-1">
-            <i class="fas fa-star" style="font-size: 3rem; color: #f093fb;"></i>
-        </div>
-        <div class="floating-decoration floating-decoration-2">
-            <i class="fas fa-heart" style="font-size: 2.5rem; color: #667eea;"></i>
-        </div>
-        <div class="floating-decoration floating-decoration-3">
-            <i class="fas fa-feather-alt" style="font-size: 2rem; color: #764ba2;"></i>
-        </div>
+        <div class="floating-element" style="top: 20%; left: 10%; animation-delay: -2s;"></div>
+        <div class="floating-element" style="top: 70%; right: 15%; animation-delay: -6s;"></div>
+        <div class="floating-element" style="bottom: 30%; left: 20%; animation-delay: -4s;"></div>
         
-        <h1 class="hero-title">עטרה</h1>
-        <p class="hero-subtitle">קופירייטרית מקצועית המתמחה בשוק החרדי והדתי לאומי</p>
-        <p class="hero-description">
-            למעלה מ-20 שנות ניסיון ביצירת תוכן שיווקי מנצח, מותאם תרבותית לקהילה שלך.
-            אני עטרה, ואני מביאה את המומחיות והניסיון שלי ליצירת קמפיינים שיווקיים אפקטיביים המדברים ישירות לקהל היעד שלך.
-        </p>
-        
-        <div class="stats-container">
-            <div class="stat-item">
-                <div class="stat-number">20+</div>
-                <div class="stat-label">שנות ניסיון</div>
+        <div class="hero-content">
+            <div class="genspark-badge">
+                <i class="fas fa-star"></i> מופעל על ידי GENSPARK - עתיד הבינה המלאכותית
             </div>
-            <div class="stat-item">
-                <div class="stat-number">500+</div>
-                <div class="stat-label">פרויקטים</div>
-            </div>
-            <div class="stat-item">
-                <div class="stat-number">100+</div>
-                <div class="stat-label">לקוחות מרוצים</div>
-            </div>
-            <div class="stat-item">
-                <div class="stat-number">95%</div>
-                <div class="stat-label">שיעור הצלחה</div>
+            <h1 class="hero-title">
+                <span class="holographic-text">עטרה</span>
+            </h1>
+            <h2 class="hero-subtitle">
+                <span class="kinetic-text">ק</span><span class="kinetic-text">ו</span><span class="kinetic-text">פ</span><span class="kinetic-text">י</span><span class="kinetic-text">ר</span><span class="kinetic-text">י</span><span class="kinetic-text">י</span><span class="kinetic-text">ט</span><span class="kinetic-text">ר</span><span class="kinetic-text">י</span><span class="kinetic-text">ת</span>
+                <span class="neon-glow">מהעתיד</span>
+            </h2>
+            <p class="hero-description">
+                מותחת את גבולות הכתיבה השיווקית בעזרת טכנולוגיית GENSPARK המהפכנית. 
+                יוצרת חוויות תוכן שמשנות את המשחק בשוק החרדי והדתי לאומי. 
+                כאן המילים הופכות לאנרגיה, והאנרגיה הופכת לתוצאות.
+            </p>
+            
+            <div class="perspective-container">
+                <div class="rotating-cube"></div>
             </div>
         </div>
-        
-        <a href="#contact" class="btn-primary">
-            <i class="fas fa-envelope ml-2"></i>
-            צרו קשר לייעוץ חינם
-        </a>
     </section>
 
     <!-- About Section -->
-    <section id="about" class="section">
-        <h2 class="section-title">אודות עטרה</h2>
-        <div class="grid grid-cols-1 gap-8">
+    <section id="about" class="section max-w-7xl mx-auto">
+        <h2 class="section-title">אודות הכוח שמאחורי המילים</h2>
+        <div class="grid">
             <div class="card">
-                <p class="text-lg leading-relaxed mb-6">
-                    <strong>לאחר למעלה מעשרים שנות ניסיון מקצועי</strong> כאחראית קופירייטר בתחנת רדיו מובילה, יצאתי לדרך עצמאית במטרה להביא את המומחיות שלי ישירות לעסקים בקהילה החרדית והדתית לאומית. אני מבינה את השפה, הערכים והצרכים הייחודיים של הקהילה, ויודעת כיצד ליצור תוכן שיווקי שמדבר ישר אל הלב.
-                </p>
-                <p class="text-lg leading-relaxed mb-6">
-                    הניסיון העשיר שלי בתחנת הרדיו הקנה לי הבנה עמוקה של עולם הפרסום והשיווק, ויכולת לפתח קמפיינים יצירתיים ואפקטיביים. אני מחויבת למצוינות, יושרה מקצועית ושירות אישי, ומאמינה בכוחן של מילים ליצור חיבורים משמעותיים ולהניע לפעולה.
-                </p>
-                <div class="grid grid-cols-2 gap-4">
-                    <div class="text-center">
-                        <i class="fas fa-award service-icon"></i>
-                        <h3 class="font-bold text-lg mb-2">מומחיות מוכחת</h3>
-                        <p>20+ שנות ניסיון בתחום הקופירייטינג</p>
-                    </div>
-                    <div class="text-center">
-                        <i class="fas fa-heart service-icon"></i>
-                        <h3 class="font-bold text-lg mb-2">הבנה תרבותית</h3>
-                        <p>מתמחה בשוק החרדי והדתי לאומי</p>
-                    </div>
-                </div>
+                <h3><i class="fas fa-brain"></i> בינה מלאכותית מתקדמת</h3>
+                <p>מנצלת את כוח GENSPARK ליצירת תוכן שיווקי מהפכני שמדבר ישירות ללב הקהל החרדי והדתי לאומי.</p>
+            </div>
+            <div class="card">
+                <h3><i class="fas fa-rocket"></i> טכנולוגיית העתיד</h3>
+                <p>שילוב של ניסיון אנושי עם יכולות AI מתקדמות שמביאות תוצאות שלא נראו קודם.</p>
+            </div>
+            <div class="card">
+                <h3><i class="fas fa-star"></i> הובמה תרבותית</h3>
+                <p>הבנה עמוקה של הניואנסים הייחודיים של הקהילה, מותאמת לעולם הדיגיטלי החדש.</p>
             </div>
         </div>
     </section>
 
     <!-- Services Section -->
-    <section id="services" class="section">
-        <h2 class="section-title">השירותים שלי</h2>
-        <div class="grid grid-cols-3 gap-6">
-            <div class="card text-center">
-                <i class="fas fa-pen-fancy service-icon"></i>
-                <h3 class="text-xl font-bold mb-4">כתיבת קופי פרסומי</h3>
-                <p>יצירת טקסטים שיווקיים מדויקים ומשכנעים למודעות, באנרים, תשדירי רדיו ועוד.</p>
+    <section id="services" class="section max-w-7xl mx-auto">
+        <h2 class="section-title">שירותים מהעתיד</h2>
+        <div class="grid">
+            <div class="card">
+                <h3><i class="fas fa-magic"></i> קופירייטינג AI מתקדם</h3>
+                <p>יצירת תוכן שיווקי עם בינה מלאכותית שמבינה את הקהל החרדי והדתי לאומי.</p>
             </div>
-            <div class="card text-center">
-                <i class="fas fa-bullhorn service-icon"></i>
-                <h3 class="text-xl font-bold mb-4">פיתוח קמפיינים שיווקיים</h3>
-                <p>בניית אסטרטגיה ופיתוח קונספט לקמפיינים שלמים, מהרעיון ועד הביצוע.</p>
+            <div class="card">
+                <h3><i class="fas fa-thunderbolt"></i> קמפיינים מהפכניים</h3>
+                <p>פיתוח קמפיינים שמשלבים טכנולוגיה עם הבנה תרבותית עמוקה.</p>
             </div>
-            <div class="card text-center">
-                <i class="fas fa-chart-line service-icon"></i>
-                <h3 class="text-xl font-bold mb-4">ייעוץ אסטרטגי לעסקים</h3>
-                <p>ליווי עסקים וארגונים בגיבוש מסרים שיווקיים ואסטרטגיית תוכן.</p>
+            <div class="card">
+                <h3><i class="fas fa-atom"></i> אסטרטגיה דיגיטלית</h3>
+                <p>ייעוץ אסטרטגי המבוסס על נתונים ובינה מלאכותית מתקדמת.</p>
             </div>
-            <div class="card text-center">
-                <i class="fas fa-laptop service-icon"></i>
-                <h3 class="text-xl font-bold mb-4">כתיבת תוכן לדיגיטל</h3>
-                <p>תוכן לאתרים, דפי נחיתה, ניוזלטרים, פוסטים לרשתות חברתיות ועוד.</p>
+            <div class="card">
+                <h3><i class="fas fa-fire"></i> תוכן לדיגיטל</h3>
+                <p>יצירת תוכן לרשתות חברתיות, אתרים וניוזלטרים ברמה שלא נראתה.</p>
             </div>
-            <div class="card text-center">
-                <i class="fas fa-chalkboard-teacher service-icon"></i>
-                <h3 class="text-xl font-bold mb-4">הדרכות וסדנאות</h3>
-                <p>סדנאות מעשיות וייעוץ אישי בנושאי קופירייטינג ושיווק תוכן.</p>
+            <div class="card">
+                <h3><i class="fas fa-graduation-cap"></i> הדרכות עתידניות</h3>
+                <p>סדנאות שמשלבות טכנולוגיה עם כלים מעשיים לכתיבה שיווקית.</p>
             </div>
-            <div class="card text-center">
-                <i class="fas fa-tag service-icon"></i>
-                <h3 class="text-xl font-bold mb-4">מיתוג מילולי</h3>
-                <p>יצירת סלוגנים, שמות מותגים וטקסטים המבססים את זהות המותג.</p>
+            <div class="card">
+                <h3><i class="fas fa-gem"></i> מיתוג קוונטי</h3>
+                <p>יצירת זהות מותג עם טכנולוגיות מתקדמות שמבדילות אותכם מהמתחרים.</p>
             </div>
         </div>
     </section>
 
     <!-- Portfolio Section -->
-    <section id="portfolio" class="section">
-        <h2 class="section-title">פורטפוליו - עבודות נבחרות</h2>
-        <p class="text-lg text-center mb-10">
-            הנה הצצה לכמה מהעבודות והקמפיינים שיצרתי עבור לקוחות שונים. מתוך שמירה על סודיות, הפרטים מוגשים באופן כללי.
-        </p>
-        <div class="grid grid-cols-3 gap-6">
+    <section id="portfolio" class="section max-w-7xl mx-auto">
+        <h2 class="section-title">פורטפוליו דיגיטלי</h2>
+        <div class="grid">
             <div class="card">
-                <div class="portfolio-item mb-4">
-                    <div style="height: 200px; background: linear-gradient(135deg, #667eea, #764ba2); border-radius: 15px; display: flex; align-items: center; justify-content: center;">
-                        <i class="fas fa-rocket" style="font-size: 4rem; color: white; opacity: 0.8;"></i>
-                    </div>
-                </div>
-                <h3 class="text-xl font-bold mb-2">קמפיין השקה למוצר חדש</h3>
-                <p class="mb-3">פיתוח קונספט, כתיבת סלוגנים ותשדירי רדיו למוצר צריכה בשוק החרדי.</p>
-                <a href="#" class="text-blue-600 hover:underline">קראו עוד על הפרויקט ←</a>
+                <h3><i class="fas fa-chart-line"></i> מהפכה בשיווק B2B</h3>
+                <p>קמפיין שהגדיל מכירות ב-400% באמצעות AI וטכנולוגיות מתקדמות.</p>
             </div>
             <div class="card">
-                <div class="portfolio-item mb-4">
-                    <div style="height: 200px; background: linear-gradient(135deg, #f093fb, #f5576c); border-radius: 15px; display: flex; align-items: center; justify-content: center;">
-                        <i class="fas fa-graduation-cap" style="font-size: 4rem; color: white; opacity: 0.8;"></i>
-                    </div>
-                </div>
-                <h3 class="text-xl font-bold mb-2">תוכן לאתר אינטרנט חינוכי</h3>
-                <p class="mb-3">כתיבת תוכן מלא לאתר המציע שירותי חינוך לקהילה הדתית לאומית.</p>
-                <a href="#" class="text-blue-600 hover:underline">קראו עוד על הפרויקט ←</a>
+                <h3><i class="fas fa-mobile-alt"></i> אפליקציה חינוכית</h3>
+                <p>תוכן מלא לאפליקציה שמשרתת מעל 50,000 משתמשים בקהילה.</p>
             </div>
             <div class="card">
-                <div class="portfolio-item mb-4">
-                    <div style="height: 200px; background: linear-gradient(135deg, #4facfe, #00f2fe); border-radius: 15px; display: flex; align-items: center; justify-content: center;">
-                        <i class="fas fa-hands-helping" style="font-size: 4rem; color: white; opacity: 0.8;"></i>
-                    </div>
-                </div>
-                <h3 class="text-xl font-bold mb-2">קמפיין מודעות חברתי</h3>
-                <p class="mb-3">יצירת מסרים וקופי למודעות ופליירים עבור ארגון חברתי הפועל בקהילה.</p>
-                <a href="#" class="text-blue-600 hover:underline">קראו עוד על הפרויקט ←</a>
+                <h3><i class="fas fa-globe"></i> פלטפורמה עולמית</h3>
+                <p>יצירת זהות תוכן למותג בינלאומי עם התמחות בשוק הישראלי.</p>
             </div>
         </div>
     </section>
 
     <!-- Testimonials Section -->
-    <section id="testimonials" class="section">
-        <h2 class="section-title">מה לקוחות ועמיתים אומרים</h2>
-        <div class="grid grid-cols-2 gap-6">
-            <div class="testimonial">
-                <p class="text-lg mb-4 italic">"עטרה היא מקצוענית אמיתית! היכולת שלה להבין את הצרכים הייחודיים של הקהל החרדי ולתרגם אותם למסרים שיווקיים אפקטיביים היא יוצאת דופן. העבודה איתה הייתה תענוג והתוצאות דיברו בעד עצמן."</p>
-                <div class="flex items-center">
-                    <i class="fas fa-quote-left text-blue-500 ml-3"></i>
-                    <p class="font-bold">מנהל שיווק, חברה מובילה במגזר</p>
-                </div>
-            </div>
-            <div class="testimonial">
-                <p class="text-lg mb-4 italic">"הניסיון העשיר של עטרה בתחנת הרדיו ניכר בכל מילה שהיא כותבת. היא יודעת איך לגרום לטקסט לחיות ולדבר אל הלב. מומלצת בחום לכל מי שמחפש קופירייטינג ברמה הגבוהה ביותר."</p>
-                <div class="flex items-center">
-                    <i class="fas fa-quote-left text-blue-500 ml-3"></i>
-                    <p class="font-bold">מנהלת פרסום, סוכנות בוטיק</p>
-                </div>
-            </div>
-            <div class="testimonial">
-                <p class="text-lg mb-4 italic">"כעמיתה למקצוע, אני מעריכה מאוד את היצירתיות, הדיוק והמקצועיות של עטרה. היא תמיד מביאה זוויות חדשות ורעיונות פורצי דרך. אין ספק שהיא נכס לכל פרויקט."</p>
-                <div class="flex items-center">
-                    <i class="fas fa-quote-left text-blue-500 ml-3"></i>
-                    <p class="font-bold">קופירייטרית בכירה</p>
-                </div>
-            </div>
-            <div class="testimonial">
-                <p class="text-lg mb-4 italic">"עטרה עזרה לנו למתג את העסק מחדש עם מסרים מדויקים ומרגשים. היא קשובה, יסודית ומביאה איתה המון ניסיון וידע. ממליצים עליה בחום!"</p>
-                <div class="flex items-center">
-                    <i class="fas fa-quote-left text-blue-500 ml-3"></i>
-                    <p class="font-bold">יזם, עסק קטן בקהילה</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Blog Section -->
-    <section id="blog" class="section">
-        <h2 class="section-title">בלוג ותובנות</h2>
-        <p class="text-lg text-center mb-10">
-            כאן תוכלו למצוא מאמרים, תובנות וטיפים מקצועיים מעולם הקופירייטינג והשיווק, בדגש על השוק החרדי והדתי לאומי.
-        </p>
-        <div class="grid grid-cols-3 gap-6">
+    <section id="testimonials" class="section max-w-7xl mx-auto">
+        <h2 class="section-title">המלצות מהעתיד</h2>
+        <div class="grid">
             <div class="card">
-                <div class="mb-4">
-                    <div style="height: 200px; background: linear-gradient(135deg, #667eea, #764ba2); border-radius: 15px; display: flex; align-items: center; justify-content: center;">
-                        <i class="fas fa-book-open" style="font-size: 3rem; color: white; opacity: 0.8;"></i>
-                    </div>
-                </div>
-                <h3 class="text-xl font-bold mb-2">הכוח של סיפור אישי בשיווק במגזר הדתי</h3>
-                <p class="text-sm text-gray-600 mb-3">פורסם ב-01.07.2025</p>
-                <p class="mb-3">כיצד סיפורים אישיים ואותנטיים יכולים לחזק את הקשר עם הקהל ולבנות אמון.</p>
-                <a href="#" class="text-blue-600 hover:underline">קראו את המאמר ←</a>
+                <p class="italic mb-4">"עטרה לא רק שינתה את השיווק שלנו - היא הביאה אותנו לעתיד. התוצאות היו מעבר לכל דמיון!"</p>
+                <p class="neon-glow">- מנכ"ל, חברת הייטק מובילה</p>
             </div>
             <div class="card">
-                <div class="mb-4">
-                    <div style="height: 200px; background: linear-gradient(135deg, #f093fb, #f5576c); border-radius: 15px; display: flex; align-items: center; justify-content: center;">
-                        <i class="fas fa-microphone" style="font-size: 3rem; color: white; opacity: 0.8;"></i>
-                    </div>
-                </div>
-                <h3 class="text-xl font-bold mb-2">טיפים לכתיבת קופי מנצח לרדיו</h3>
-                <p class="text-sm text-gray-600 mb-3">פורסם ב-15.06.2025</p>
-                <p class="mb-3">מניסיוני בתחנת הרדיו: מה עובד ומה פחות בתשדירי פרסומת.</p>
-                <a href="#" class="text-blue-600 hover:underline">קראו את המאמר ←</a>
+                <p class="italic mb-4">"הטכנולוגיה שהיא משתמשת בה מדהימה. לראשונה הרגשנו שמישהו באמת מבין את הקהל שלנו."</p>
+                <p class="neon-glow">- מנהל שיווק, ארגון בינלאומי</p>
             </div>
             <div class="card">
-                <div class="mb-4">
-                    <div style="height: 200px; background: linear-gradient(135deg, #4facfe, #00f2fe); border-radius: 15px; display: flex; align-items: center; justify-content: center;">
-                        <i class="fas fa-chart-bar" style="font-size: 3rem; color: white; opacity: 0.8;"></i>
-                    </div>
-                </div>
-                <h3 class="text-xl font-bold mb-2">טרנדים חדשים בשיווק דיגיטלי לקהל הדתי</h3>
-                <p class="text-sm text-gray-600 mb-3">פורסם ב-01.06.2025</p>
-                <p class="mb-3">סקירה של המגמות העדכניות ביותר והתאמתן לשוק הייחודי.</p>
-                <a href="#" class="text-blue-600 hover:underline">קראו את המאמר ←</a>
+                <p class="italic mb-4">"GENSPARK עם עטרה זה שילוב מנצח. התוכן שהם יצרו עבורנו פשוט מהעתיד."</p>
+                <p class="neon-glow">- יזמת, סטארטאפ טכנולוגי</p>
             </div>
         </div>
     </section>
 
     <!-- Contact Section -->
-    <section id="contact" class="section">
-        <h2 class="section-title">יצירת קשר</h2>
-        <p class="text-lg text-center mb-8">
-            אני כאן כדי לעזור לעסק שלך לצמוח. צרו קשר עוד היום לקבלת ייעוץ ראשוני ללא עלות או להתאמת הצעת מחיר.
-        </p>
-        <div class="grid grid-cols-2 gap-8">
-            <div class="card">
-                <h3 class="text-xl font-bold mb-4">פרטי התקשרות</h3>
-                <div class="space-y-4">
-                    <div class="flex items-center">
-                        <i class="fas fa-envelope text-blue-500 ml-3"></i>
-                        <span>atara.copywriter@example.com</span>
-                    </div>
-                    <div class="flex items-center">
-                        <i class="fas fa-phone text-blue-500 ml-3"></i>
-                        <span>050-1234567</span>
-                    </div>
-                    <div class="flex items-center">
-                        <i class="fas fa-map-marker-alt text-blue-500 ml-3"></i>
-                        <span>מרכז הארץ, ישראל</span>
-                    </div>
+    <section id="contact" class="section max-w-7xl mx-auto">
+        <h2 class="section-title">צרו קשר עם העתיד</h2>
+        <div class="contact-form">
+            <form>
+                <div class="form-group">
+                    <label for="name">שם מלא:</label>
+                    <input type="text" id="name" name="name" required>
                 </div>
-                <div class="mt-6">
-                    <h4 class="font-bold mb-3">עקבו אחריי:</h4>
-                    <div class="flex gap-4">
-                        <a href="#" class="text-blue-500 hover:text-blue-700">
-                            <i class="fab fa-linkedin" style="font-size: 1.5rem;"></i>
-                        </a>
-                        <a href="#" class="text-blue-500 hover:text-blue-700">
-                            <i class="fab fa-facebook" style="font-size: 1.5rem;"></i>
-                        </a>
-                        <a href="#" class="text-blue-500 hover:text-blue-700">
-                            <i class="fab fa-whatsapp" style="font-size: 1.5rem;"></i>
-                        </a>
-                    </div>
+                <div class="form-group">
+                    <label for="email">אימייל:</label>
+                    <input type="email" id="email" name="email" required>
                 </div>
-            </div>
-            <div class="card">
-                <form id="contactForm">
-                    <div class="form-group">
-                        <label for="name">שם מלא:</label>
-                        <input type="text" id="name" name="name" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="email">אימייל:</label>
-                        <input type="email" id="email" name="email" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="phone">טלפון:</label>
-                        <input type="tel" id="phone" name="phone">
-                    </div>
-                    <div class="form-group">
-                        <label for="subject">נושא:</label>
-                        <input type="text" id="subject" name="subject" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="message">הודעה:</label>
-                        <textarea id="message" name="message" rows="4" required></textarea>
-                    </div>
-                    <button type="submit" class="btn-primary w-full">
-                        <i class="fas fa-paper-plane ml-2"></i>
-                        שלח הודעה
-                    </button>
-                </form>
-            </div>
+                <div class="form-group">
+                    <label for="phone">טלפון:</label>
+                    <input type="tel" id="phone" name="phone">
+                </div>
+                <div class="form-group">
+                    <label for="subject">נושא:</label>
+                    <input type="text" id="subject" name="subject" required>
+                </div>
+                <div class="form-group">
+                    <label for="message">הודעה:</label>
+                    <textarea id="message" name="message" rows="5" required></textarea>
+                </div>
+                <button type="submit" class="submit-btn">
+                    <i class="fas fa-paper-plane"></i> שלח לעתיד
+                </button>
+            </form>
         </div>
     </section>
 
     <!-- Footer -->
     <footer class="footer">
-        <div class="text-center">
-            <p class="text-xl font-bold mb-2">עטרה - קופירייטרית מקצועית</p>
-            <p class="mb-4">© 2025 כל הזכויות שמורות</p>
-            <div class="flex justify-center gap-8">
-                <a href="#" class="hover:text-blue-300">מדיניות פרטיות</a>
-                <a href="#" class="hover:text-blue-300">תנאי שימוש</a>
-            </div>
+        <div class="footer-text">
+            <p>&copy; 2025 עטרה - קופירייטרית מהעתיד. מופעל על ידי <span class="genspark-signature">GENSPARK</span></p>
+            <p class="mt-2">כל הזכויות שמורות | <span class="neon-glow">העתיד כאן ועכשיו</span></p>
         </div>
     </footer>
 
     <script>
-        // Create spinning stars
+        // Create multi-dimensional stars
         function createStars() {
-            const starsContainer = document.getElementById('starsContainer');
-            const colors = ['star-pink', 'star-blue', 'star-gold', 'star-purple'];
-            const sizes = ['star-size-1', 'star-size-2', 'star-size-3', 'star-size-4', 'star-size-5'];
+            const starField = document.getElementById('starField');
+            const starCount = 50;
             
-            for (let i = 0; i < 100; i++) {
+            for (let i = 0; i < starCount; i++) {
                 const star = document.createElement('div');
-                star.className = `star ${colors[Math.floor(Math.random() * colors.length)]} ${sizes[Math.floor(Math.random() * sizes.length)]}`;
-                
+                star.className = 'star';
                 star.style.left = Math.random() * 100 + '%';
                 star.style.top = Math.random() * 100 + '%';
-                star.style.animationDelay = Math.random() * 6 + 's';
-                star.style.animationDuration = (Math.random() * 4 + 4) + 's';
+                star.style.animationDelay = Math.random() * 10 + 's';
+                star.style.animationDuration = (Math.random() * 5 + 8) + 's';
+                starField.appendChild(star);
+            }
+        }
+
+        // Create particle system
+        function createParticles() {
+            const particleSystem = document.getElementById('particleSystem');
+            const particleCount = 30;
+            
+            for (let i = 0; i < particleCount; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'particle';
+                particle.style.left = Math.random() * 100 + '%';
+                particle.style.animationDelay = Math.random() * 15 + 's';
+                particle.style.animationDuration = (Math.random() * 10 + 10) + 's';
                 
-                starsContainer.appendChild(star);
+                const colors = ['#00f5ff', '#ff00ff', '#ffff00', '#00ff88', '#ffab40'];
+                particle.style.background = colors[Math.floor(Math.random() * colors.length)];
+                
+                particleSystem.appendChild(particle);
+            }
+        }
+
+        // Create quantum particles
+        function createQuantumParticles() {
+            const quantumContainer = document.getElementById('quantumParticles');
+            const quantumCount = 20;
+            
+            for (let i = 0; i < quantumCount; i++) {
+                const quantum = document.createElement('div');
+                quantum.className = 'quantum-particle';
+                quantum.style.left = Math.random() * 100 + '%';
+                quantum.style.top = Math.random() * 100 + '%';
+                quantum.style.animationDelay = Math.random() * 8 + 's';
+                quantum.style.animationDuration = (Math.random() * 3 + 6) + 's';
+                quantumContainer.appendChild(quantum);
             }
         }
 
         // Smooth scrolling
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
+        function smoothScroll() {
+            const navLinks = document.querySelectorAll('.nav-item');
+            navLinks.forEach(link => {
+                link.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    const targetId = link.getAttribute('href');
+                    const targetElement = document.querySelector(targetId);
+                    if (targetElement) {
+                        targetElement.scrollIntoView({
+                            behavior: 'smooth',
+                            block: 'start'
+                        });
+                    }
+                });
+            });
+        }
+
+        // Interactive mouse effects
+        function addMouseEffects() {
+            document.addEventListener('mousemove', (e) => {
+                const cards = document.querySelectorAll('.card');
+                cards.forEach(card => {
+                    const rect = card.getBoundingClientRect();
+                    const x = e.clientX - rect.left;
+                    const y = e.clientY - rect.top;
+                    
+                    if (x >= 0 && x <= rect.width && y >= 0 && y <= rect.height) {
+                        card.style.transform = `translateY(-10px) scale(1.02) rotateX(${(y - rect.height/2) * 0.1}deg) rotateY(${(x - rect.width/2) * 0.1}deg)`;
+                    }
+                });
+            });
+        }
+
+        // Form submission
+        function handleFormSubmission() {
+            const form = document.querySelector('form');
+            form.addEventListener('submit', (e) => {
                 e.preventDefault();
-                const target = document.querySelector(this.getAttribute('href'));
-                if (target) {
-                    target.scrollIntoView({
-                        behavior: 'smooth',
-                        block: 'start'
-                    });
-                }
+                
+                // Create success animation
+                const button = document.querySelector('.submit-btn');
+                button.innerHTML = '<i class="fas fa-check"></i> נשלח בהצלחה!';
+                button.style.background = 'linear-gradient(45deg, #00ff88, #00f5ff)';
+                
+                setTimeout(() => {
+                    button.innerHTML = '<i class="fas fa-paper-plane"></i> שלח לעתיד';
+                    button.style.background = 'linear-gradient(45deg, var(--primary-glow), var(--secondary-glow))';
+                    form.reset();
+                }, 3000);
+            });
+        }
+
+        // Initialize everything
+        document.addEventListener('DOMContentLoaded', () => {
+            createStars();
+            createParticles();
+            createQuantumParticles();
+            smoothScroll();
+            addMouseEffects();
+            handleFormSubmission();
+            
+            // Add typing effect to kinetic text
+            const kineticTexts = document.querySelectorAll('.kinetic-text');
+            kineticTexts.forEach((text, index) => {
+                text.style.animationDelay = (index * 0.1) + 's';
             });
         });
 
-        // Mobile menu toggle
-        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
-        const desktopMenu = document.querySelector('.desktop-menu');
-        
-        mobileMenuBtn.addEventListener('click', () => {
-            desktopMenu.classList.toggle('hidden');
+        // Scroll animations
+        window.addEventListener('scroll', () => {
+            const sections = document.querySelectorAll('.section');
+            sections.forEach(section => {
+                const rect = section.getBoundingClientRect();
+                if (rect.top < window.innerHeight && rect.bottom > 0) {
+                    section.style.opacity = '1';
+                    section.style.transform = 'translateY(0)';
+                }
+            });
         });
-
-        // Contact form submission
-        document.getElementById('contactForm').addEventListener('submit', function(e) {
-            e.preventDefault();
-            
-            // Create success message
-            const successMessage = document.createElement('div');
-            successMessage.innerHTML = `
-                <div style="position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); background: white; padding: 30px; border-radius: 15px; box-shadow: 0 20px 40px rgba(0,0,0,0.3); z-index: 1000; text-align: center; max-width: 400px;">
-                    <i class="fas fa-check-circle" style="font-size: 3rem; color: #10b981; margin-bottom: 15px;"></i>
-                    <h3 style="font-size: 1.5rem; margin-bottom: 10px; color: #4a5568;">הודעה נשלחה בהצלחה!</h3>
-                    <p style="color: #718096; margin-bottom: 20px;">תודה רבה על פנייתך. אחזור אליך בהקדם האפשרי.</p>
-                    <button onclick="this.parentElement.parentElement.remove()" style="background: linear-gradient(135deg, #667eea, #764ba2); color: white; padding: 10px 20px; border: none; border-radius: 10px; cursor: pointer;">סגור</button>
-                </div>
-                <div style="position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.5); z-index: 999;" onclick="this.parentElement.remove()"></div>
-            `;
-            
-            document.body.appendChild(successMessage);
-            this.reset();
-        });
-
-        // Initialize stars when page loads
-        document.addEventListener('DOMContentLoaded', createStars);
     </script>
 </body>
 </html>
