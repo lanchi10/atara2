@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>עטרה - GENSPARK מהפכת העתיד</title>
+    <title>עטרה - קופירייטרית מהעתיד</title>
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css">
@@ -305,24 +305,6 @@
             line-height: 1.6;
         }
 
-        .genspark-badge {
-            display: inline-block;
-            background: linear-gradient(45deg, var(--primary-glow), var(--secondary-glow));
-            color: #000;
-            padding: 0.5rem 1.5rem;
-            border-radius: 50px;
-            font-weight: 700;
-            font-size: 0.9rem;
-            margin-bottom: 2rem;
-            animation: badge-pulse 3s ease-in-out infinite;
-            box-shadow: 0 0 30px rgba(0, 245, 255, 0.5);
-        }
-
-        @keyframes badge-pulse {
-            0%, 100% { transform: scale(1); box-shadow: 0 0 30px rgba(0, 245, 255, 0.5); }
-            50% { transform: scale(1.1); box-shadow: 0 0 50px rgba(0, 245, 255, 0.8); }
-        }
-
         /* 3D Floating Elements */
         .floating-element {
             position: absolute;
@@ -528,10 +510,93 @@
             box-shadow: 0 0 50px rgba(0, 245, 255, 1);
         }
 
+        /* Mobile Menu Animation */
+        .mobile-menu-toggle.active span:nth-child(1) {
+            transform: rotate(-45deg) translate(-5px, 6px);
+        }
+
+        .mobile-menu-toggle.active span:nth-child(2) {
+            opacity: 0;
+        }
+
+        .mobile-menu-toggle.active span:nth-child(3) {
+            transform: rotate(45deg) translate(-5px, -6px);
+        }
+
+        /* Mobile Navigation */
+        .mobile-menu-toggle {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+            z-index: 1001;
+        }
+
+        .mobile-menu-toggle span {
+            width: 25px;
+            height: 3px;
+            background: var(--primary-glow);
+            margin: 3px 0;
+            transition: 0.3s;
+            border-radius: 2px;
+        }
+
+        .mobile-menu {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100vh;
+            background: rgba(0, 0, 0, 0.95);
+            backdrop-filter: blur(20px);
+            z-index: 1000;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            gap: 2rem;
+        }
+
+        .mobile-menu.active {
+            display: flex;
+        }
+
+        .mobile-nav-item {
+            color: #ffffff;
+            text-decoration: none;
+            font-size: 1.5rem;
+            padding: 1rem 2rem;
+            border: 1px solid transparent;
+            border-radius: 10px;
+            transition: all 0.3s ease;
+            text-align: center;
+            min-width: 200px;
+        }
+
+        .mobile-nav-item:hover {
+            color: var(--primary-glow);
+            border-color: var(--primary-glow);
+            background: rgba(0, 245, 255, 0.1);
+            box-shadow: 0 0 20px rgba(0, 245, 255, 0.3);
+        }
+
+        .desktop-nav {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
         /* Mobile Responsive */
         @media (max-width: 768px) {
             .nav-container {
                 padding: 0.5rem 1rem;
+            }
+
+            .desktop-nav {
+                display: none;
+            }
+
+            .mobile-menu-toggle {
+                display: flex;
             }
             
             .hero-section {
@@ -545,6 +610,52 @@
             
             .card {
                 margin: 1rem 0;
+            }
+
+            .nav-logo {
+                font-size: 1.5rem;
+            }
+
+            .hero-title {
+                font-size: clamp(2rem, 10vw, 4rem);
+            }
+
+            .hero-subtitle {
+                font-size: clamp(1rem, 4vw, 1.5rem);
+            }
+
+            .section-title {
+                font-size: clamp(1.5rem, 6vw, 2.5rem);
+            }
+
+            .grid {
+                grid-template-columns: 1fr;
+                gap: 1rem;
+            }
+
+            .contact-form {
+                padding: 2rem 1rem;
+                margin: 0 1rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .nav-container {
+                padding: 0.5rem;
+            }
+
+            .hero-description {
+                font-size: 1rem;
+                padding: 0 1rem;
+            }
+
+            .mobile-nav-item {
+                font-size: 1.2rem;
+                min-width: 150px;
+            }
+
+            .card {
+                padding: 1.5rem;
             }
         }
 
@@ -626,18 +737,6 @@
             color: rgba(255, 255, 255, 0.6);
             font-size: 0.9rem;
         }
-
-        .genspark-signature {
-            color: var(--primary-glow);
-            font-weight: 700;
-            text-shadow: 0 0 10px var(--primary-glow);
-            animation: signature-glow 3s ease-in-out infinite;
-        }
-
-        @keyframes signature-glow {
-            0%, 100% { opacity: 0.8; }
-            50% { opacity: 1; }
-        }
     </style>
 </head>
 <body>
@@ -665,7 +764,9 @@
     <nav class="nav-container">
         <div class="max-w-7xl mx-auto px-4 flex justify-between items-center">
             <div class="nav-logo">עטרה</div>
-            <div class="flex items-center space-x-6">
+            
+            <!-- Desktop Navigation -->
+            <div class="desktop-nav">
                 <a href="#home" class="nav-item">בית</a>
                 <a href="#about" class="nav-item">אודות</a>
                 <a href="#services" class="nav-item">שירותים</a>
@@ -673,15 +774,33 @@
                 <a href="#testimonials" class="nav-item">המלצות</a>
                 <a href="#contact" class="nav-item">יצירת קשר</a>
             </div>
+
+            <!-- Mobile Menu Toggle -->
+            <div class="mobile-menu-toggle" onclick="toggleMobileMenu()">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
         </div>
     </nav>
+
+    <!-- Mobile Navigation Menu -->
+    <div class="mobile-menu" id="mobileMenu">
+        <a href="#home" class="mobile-nav-item" onclick="closeMobileMenu()">בית</a>
+        <a href="#about" class="mobile-nav-item" onclick="closeMobileMenu()">אודות</a>
+        <a href="#services" class="mobile-nav-item" onclick="closeMobileMenu()">שירותים</a>
+        <a href="#portfolio" class="mobile-nav-item" onclick="closeMobileMenu()">פורטפוליו</a>
+        <a href="#testimonials" class="mobile-nav-item" onclick="closeMobileMenu()">המלצות</a>
+        <a href="#contact" class="mobile-nav-item" onclick="closeMobileMenu()">יצירת קשר</a>
+    </div>
 
     <!-- Hero Section -->
     <section id="home" class="hero-section">
         <div class="floating-element" style="top: 20%; left: 10%; animation-delay: -2s;"></div>
         <div class="floating-element" style="top: 70%; right: 15%; animation-delay: -6s;"></div>
         <div class="floating-element" style="bottom: 30%; left: 20%; animation-delay: -4s;"></div>
-      
+        
+        <div class="hero-content">
             <h1 class="hero-title">
                 <span class="holographic-text">עטרה</span>
             </h1>
@@ -690,7 +809,7 @@
                 <span class="neon-glow">מהעתיד</span>
             </h2>
             <p class="hero-description">
-                מותחת את גבולות הכתיבה השיווקית בעזרת טכנולוגיית GENSPARK המהפכנית. 
+                מותחת את גבולות הכתיבה השיווקית בעזרת טכנולוגיות מתקדמות. 
                 יוצרת חוויות תוכן שמשנות את המשחק בשוק החרדי והדתי לאומי. 
                 כאן המילים הופכות לאנרגיה, והאנרגיה הופכת לתוצאות.
             </p>
@@ -707,14 +826,14 @@
         <div class="grid">
             <div class="card">
                 <h3><i class="fas fa-brain"></i> בינה מלאכותית מתקדמת</h3>
-                <p>מנצלת את כוח GENSPARK ליצירת תוכן שיווקי מהפכני שמדבר ישירות ללב הקהל החרדי והדתי לאומי.</p>
+                <p>מנצלת טכנולוגיות חדשניות ליצירת תוכן שיווקי מהפכני שמדבר ישירות ללב הקהל החרדי והדתי לאומי.</p>
             </div>
             <div class="card">
                 <h3><i class="fas fa-rocket"></i> טכנולוגיית העתיד</h3>
                 <p>שילוב של ניסיון אנושי עם יכולות AI מתקדמות שמביאות תוצאות שלא נראו קודם.</p>
             </div>
             <div class="card">
-                <h3><i class="fas fa-star"></i> הבנה תרבותית</h3>
+                <h3><i class="fas fa-star"></i> הובמה תרבותית</h3>
                 <p>הבנה עמוקה של הניואנסים הייחודיים של הקהילה, מותאמת לעולם הדיגיטלי החדש.</p>
             </div>
         </div>
@@ -783,7 +902,7 @@
                 <p class="neon-glow">- מנהל שיווק, ארגון בינלאומי</p>
             </div>
             <div class="card">
-                <p class="italic mb-4">"GENSPARK עם עטרה זה שילוב מנצח. התוכן שהם יצרו עבורנו פשוט מהעתיד."</p>
+                <p class="italic mb-4">"השילוב הייחודי של טכנולוגיה עם הבנה תרבותית זה שילוב מנצח. התוכן שהם יצרו עבורנו פשוט מהעתיד."</p>
                 <p class="neon-glow">- יזמת, סטארטאפ טכנולוגי</p>
             </div>
         </div>
@@ -821,7 +940,13 @@
         </div>
     </section>
 
-
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-text">
+            <p>&copy; 2025 עטרה - קופירייטרית מהעתיד</p>
+            <p class="mt-2">כל הזכויות שמורות | <span class="neon-glow">העתיד כאן ועכשיו</span></p>
+        </div>
+    </footer>
 
     <script>
         // Create multi-dimensional stars
@@ -928,12 +1053,50 @@
             });
         }
 
+        // Mobile menu functions
+        function toggleMobileMenu() {
+            const mobileMenu = document.getElementById('mobileMenu');
+            mobileMenu.classList.toggle('active');
+            
+            // Animate hamburger menu
+            const toggle = document.querySelector('.mobile-menu-toggle');
+            toggle.classList.toggle('active');
+        }
+
+        function closeMobileMenu() {
+            const mobileMenu = document.getElementById('mobileMenu');
+            mobileMenu.classList.remove('active');
+            
+            const toggle = document.querySelector('.mobile-menu-toggle');
+            toggle.classList.remove('active');
+        }
+
+        // Smooth scrolling for mobile menu
+        function smoothScrollMobile() {
+            const mobileNavLinks = document.querySelectorAll('.mobile-nav-item');
+            mobileNavLinks.forEach(link => {
+                link.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    const targetId = link.getAttribute('href');
+                    const targetElement = document.querySelector(targetId);
+                    if (targetElement) {
+                        targetElement.scrollIntoView({
+                            behavior: 'smooth',
+                            block: 'start'
+                        });
+                    }
+                    closeMobileMenu();
+                });
+            });
+        }
+
         // Initialize everything
         document.addEventListener('DOMContentLoaded', () => {
             createStars();
             createParticles();
             createQuantumParticles();
             smoothScroll();
+            smoothScrollMobile();
             addMouseEffects();
             handleFormSubmission();
             
@@ -941,6 +1104,18 @@
             const kineticTexts = document.querySelectorAll('.kinetic-text');
             kineticTexts.forEach((text, index) => {
                 text.style.animationDelay = (index * 0.1) + 's';
+            });
+
+            // Close mobile menu when clicking outside
+            document.addEventListener('click', (e) => {
+                const mobileMenu = document.getElementById('mobileMenu');
+                const toggle = document.querySelector('.mobile-menu-toggle');
+                
+                if (mobileMenu.classList.contains('active') && 
+                    !mobileMenu.contains(e.target) && 
+                    !toggle.contains(e.target)) {
+                    closeMobileMenu();
+                }
             });
         });
 
